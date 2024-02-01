@@ -1,3 +1,3 @@
-# Datasets
+# Machine Trnslation T5 NusaX-MT
 
-For this study im using nusax datasets cause its have 10 indonesian local languages
+This is experimental project to build Machine Translation for Indonesian Local Languages.
