@@ -51,7 +51,7 @@ Bigrams :
  ('di dieu.', 21)]
 ```
 
-Trigrams : 
+<!-- Trigrams : 
 ```git
 [('ora ana', 34),
  ('enak lan', 30),
@@ -74,7 +74,7 @@ Trigrams :
  ('teu tiasa', 24),
  ('di tempat', 23),
  ('di dieu.', 21)]
-```
+``` -->
 
 #### WordClouds
 Javanese : 
@@ -205,3 +205,4 @@ predict_eval_df['meteor'].mean()
 18.092717876126102
 0.4190095152615721
 ```
+
