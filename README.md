@@ -1,10 +1,11 @@
 # Indonesian Local Machine Translation
 
-This is experimental project to build Machine Translation for Indonesian Local Languages.
+## Overview
 
-Indonesia has around 17,000 islands with 360 ethnic groups and around 840 regional languages. With so many tribes and languages, it makes communication and socialization difficult for us. That's why we created this translation machine in the hope that it can be a solution for our daily communication and socialization.
+This is an experimental project focused on building a Machine Translation system for Indonesian local languages. Indonesia, with around 17,000 islands, 360 ethnic groups, and 840 regional languages, faces challenges in communication and socialization due to this diversity. The goal of this project is to provide a solution for daily communication and socialization by developing a translation machine.
 
-This project uses datasets from [Nusax](https://huggingface.co/datasets/indonlp/NusaX-MT) and [CC100](https://metatext.io/datasets/cc100) and uses pretrained models from Transformers. The NusaX dataset itself has 12 languages ​​that have been labeled, namely Indonesian, English, and 10 Indonesian local languages, namely Acehnese, Balinese, Banjarese, Buginese, Madurese, Minangkabau, Javanese, Ngaju, Sundanese, and Toba Batak. And the CC100 dataset has around 100 languages, but we only use the sub-dataset, namely Javanese and Sundanese, because currently we are still focusing on translation from Sundanese to Javanese and vice versa.
+The project utilizes datasets from [Nusax](https://huggingface.co/datasets/indonlp/NusaX-MT) and [CC100](https://metatext.io/datasets/cc100), along with pretrained models from Transformers. The NusaX dataset includes 12 labeled languages, including Indonesian, English, and 10 Indonesian local languages, namely Acehnese, Balinese, Banjarese, Buginese, Madurese, Minangkabau, Javanese, Ngaju, Sundanese, and Toba Batak. The CC100 dataset, which has around 100 languages, is narrowed down to Javanese and Sundanese for the current focus on translation between these two languages.
+
 
 ## Exploratory Datasets Anaylis
 
