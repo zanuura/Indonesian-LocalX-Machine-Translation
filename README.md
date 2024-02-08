@@ -2,9 +2,9 @@
 
 ## Overview
 
-This is an experimental project focused on building a Machine Translation system for Indonesian local languages. Indonesia, with around 17,000 islands, 360 ethnic groups, and 840 regional languages, faces challenges in communication and socialization due to this diversity. The goal of this project is to provide a solution for daily communication and socialization by developing a translation machine.
+Welcome to the documentation of our experimental project, which focuses on developing a machine translation system for local Indonesian languages. With more than 17,000 islands, 360 ethnic groups, and 840 regional languages, Indonesia faces unique challenges in communication and socialization between its people. This project aims to bridge this communication gap by creating a translation engine that can facilitate daily interactions.
 
-The project utilizes datasets from [Nusax](https://huggingface.co/datasets/indonlp/NusaX-MT) and [CC100](https://metatext.io/datasets/cc100), along with pretrained models from Transformers. The NusaX dataset includes 12 labeled languages, including Indonesian, English, and 10 Indonesian local languages, namely Acehnese, Balinese, Banjarese, Buginese, Madurese, Minangkabau, Javanese, Ngaju, Sundanese, and Toba Batak. The CC100 dataset, which has around 100 languages, is narrowed down to Javanese and Sundanese for the current focus on translation between these two languages, and because we have not found datasets for other local languages..
+We use datasets from [NusaX](https://huggingface.co/datasets/indonlp/NusaX-MT) and [CC100](https://metatext.io/datasets/cc100), as well as pretrained models from Transformers. The NusaX dataset includes 12 labeled languages, including Indonesian, English, and 10 regional Indonesian languages, namely Acehnese, Balinese, Banjarese, Bugis, Madurese, Minangkabau, Javanese, Ngaju, Sundanese, and Toba Batak. The CC100 dataset, which includes around 100 languages, is focused on Javanese and Sundanese for the current translation focus, given the limitations of the dataset for other regional languages.
 
 
 ## Exploratory Datasets Anaylis
@@ -175,6 +175,10 @@ display(predict_eval_df['bleurt'].mean())
 array([-0.13708009])
 ```
 
+As can be seen, the accuracy of our system is still not optimal, which is caused by the limited number of datasets we have and device limitations. However, we believe that with a larger dataset and more sophisticated tools, this model can achieve much better accuracy. We hope this project can be a valuable first step in efforts to overcome language barriers in Indonesia, and we are open to collaboration and support to expand the scope and effectiveness of our machine translation system.
+
+Thank you for visiting our project. For more detailed information about the dataset, references and how to use the system, please visit the following links:
+
 
 # Datasets
 - https://huggingface.co/datasets/indonlp/NusaX-MT
@@ -193,4 +197,9 @@ array([-0.13708009])
 - https://www.mdpi.com/2227-7390/11/4/1006
 - https://huggingface.co/spaces/evaluate-metric/bertscore#:~:text=Metric%20description,token%20in%20the%20reference%20sentence
 - https://huggingface.co/spaces/evaluate-metric/bleurt
+
+We hope this documentation helps you understand more about our project and how you can get involved. Thank you for being part of this journey.
+
+<h3 align="center">Sampurasun🙏</h3>
+
 
