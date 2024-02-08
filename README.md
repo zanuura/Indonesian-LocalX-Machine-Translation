@@ -4,7 +4,7 @@
 
 This is an experimental project focused on building a Machine Translation system for Indonesian local languages. Indonesia, with around 17,000 islands, 360 ethnic groups, and 840 regional languages, faces challenges in communication and socialization due to this diversity. The goal of this project is to provide a solution for daily communication and socialization by developing a translation machine.
 
-The project utilizes datasets from [Nusax](https://huggingface.co/datasets/indonlp/NusaX-MT) and [CC100](https://metatext.io/datasets/cc100), along with pretrained models from Transformers. The NusaX dataset includes 12 labeled languages, including Indonesian, English, and 10 Indonesian local languages, namely Acehnese, Balinese, Banjarese, Buginese, Madurese, Minangkabau, Javanese, Ngaju, Sundanese, and Toba Batak. The CC100 dataset, which has around 100 languages, is narrowed down to Javanese and Sundanese for the current focus on translation between these two languages.
+The project utilizes datasets from [Nusax](https://huggingface.co/datasets/indonlp/NusaX-MT) and [CC100](https://metatext.io/datasets/cc100), along with pretrained models from Transformers. The NusaX dataset includes 12 labeled languages, including Indonesian, English, and 10 Indonesian local languages, namely Acehnese, Balinese, Banjarese, Buginese, Madurese, Minangkabau, Javanese, Ngaju, Sundanese, and Toba Batak. The CC100 dataset, which has around 100 languages, is narrowed down to Javanese and Sundanese for the current focus on translation between these two languages, and because we have not found datasets for other local languages..
 
 
 ## Exploratory Datasets Anaylis
