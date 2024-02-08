@@ -108,7 +108,7 @@ Javanese :
 
 ```python
 training_args = Seq2SeqTrainingArguments(
-    output_dir="T5_NusaX_Jav_Sun_checkpoints",
+    output_dir="T5_NusaX_Sun_Jav_checkpoints",
     evaluation_strategy="epoch",
     learning_rate=2e-5,
     per_device_train_batch_size=16,
@@ -135,75 +135,62 @@ trainer.train()
 
 ### Test Predict Evaluate
 
-```python
+20 Row from 200
+|index|id|input|predict|target|bleu|meteor|bleurt|
+|---|---|---|---|---|---|---|---|
+|0|330|Karya bakti bca finance posisi relationship officer muka lowongan kanggo panempatan Pekanbaru|Karya bakti bca finance posisi relationship officer muka lowongan kanggo kusabab pekanbaru|Karya bakti bca finance posisi relationship officer mbukak lowongan dingge manggon pekanbaru|54\.91004867761124|0\.7361111111111112|\[0\.39940304\]|
+|1|204|Ku meser morinaga chil kid sareng chil school saharga rp 500\. 000, bunda bakal nampi voucher gopay rp 50\. 000\. |Ku meser morinaga chil kid lan chil school saharga rp 500\. 000, bunda bakal nampi voucher gopay rp 50\. 000\.|Kanthi tuku morinaga chil kid lan chil school rega rp 500\. 000, ibu isa entuk voucher gopay rp 50\. 000\.|58\.15025407036991|0\.748263888888889|\[0\.05238612\]|
+|2|391|Punten perhatosanna admin\. Jaringan di cileungsi bogor awon pisan kualitasna\. Padahal mayarna awis\.|Pangan perhatosane admin\. Jaringan ning cileungsi bogor awis banget kualitase\. Padahal mayarna awis\.|Tulung perhatiane admin\. Jaringan ning cileungsi bogor elek banget kualitase\. Padahal bayare larang\.|46\.892438882117254|0\.6805268595041322|\[0\.08063303\]|
+|3|200|Tuangeun india numutkeun abdi teu raos\. Seueur teuing rempah|Panganan indi aku ora enak\. Ora ora rempah|Panganan india miturut ku ora enak\. Kakehan bumbon|19\.070828081828378|0\.3506944444444444|\[-0\.37893215\]|
+|4|462|Tagihan internet abdi teu lebet kanu akal 250% leuwih awis kakak\! Peryogi penjelasan\.|Tagihan internet aku ora akal 250% leuwih saka\! Peryogi penjelasan\.|Tagihan internetku ora mlebu akal 250% luwih larang kang\! Njaluk penjelasan\.|15\.05770286076146|0\.505283273381295|\[0\.18163721\]|
+|5|122|baheula resep pisan tuang di dieu dina sami waktosna di Jakarta, nembe terang yen aya oge di Bandung\. Tempatna sae pisan\. Aya seueur pilihan suasana anu tiasa dipilih, naha di luar, di jero rohangan, ngaroko atanapi henteu, aya tempat pikeun sadaya jinis tamu\. Dahareunana oge raos\. Siga pasta-pasta ala urang Indonesia\.|Aku seneng banget mangan ning kene ning karo wektu, nembe terang ana uga ning bandung\. Panggonane apik banget\. Aya seueur pilihan suwasane sing isa dipilih, nanging jero rohangan, nggawe akeh, ana panggonane sadaya jinis tamu\. Dahareunane uga enak\. Siga pasta-pasta enak\.|Biyen aku seneng banget mangan ning kene wektu podo ning jakarta, lagek eruh lak ning bandung uga ana\. Panggone enak banget\. Akeh pilihan kahanan sing isa dipilih, sir ning jaba, jero, ngrokok utawa ngge ora, ana panggon dinggo kabeh jenis wong moro\. Panganane uga enak seh\. Ya pasta-pasta ala wong indonesia\.|13\.997172942497256|0\.4161971820190063|\[-0\.17970386\]|
+|6|97|Abdi teu kuciwa ka produk apple|Aku ora kuciwa ka produk apple|Aku ora kuciwa karo produke apple|32\.46679154750991|0\.8066666666666668|\[0\.60135025\]|
+|7|2|Kangkungna lumayan mung kepiting saos padangna nguciwakeun arurang dipasihan kepiting anu kopong ahirna arurang teu tuang kepitingna sareng dibalikkeun\.|Kanggonane lumayan nanging nguciwakeun awakdewe dipasihan awakdewe ora mangan awakdewe lan dibalikkeun\.|Kangkunge lumayan nanging yuyu saus padange nguciwakake dhewe dikei yuyu sing kopong akhir dhewe ora mangan yuyune lan dibalekake\.|5\.643423197451416|0\.26482440990213013|\[-0\.15498953\]|
+|8|493|Parah pisan kuring mesen di bukalapak nganggo gosend kamari nepi ayeuna teu acan sumping kumaha ieu\. Barangna peryogi pisan|Abdi mesen ning bukalapak nganggo gosend nyaeta ora acan kumaha iki\. Panganane peryogi banget|Nemen pesen bukalapak nanggo gosend dekwingi sampek saiki durung teka piye iki\. Butuh barange banget|6\.1827411661290235|0\.23396226415094337|\[-0\.15670584\]|
+|9|174|Mimiti ka dieu eta ngarayakeun kalulusan rai abdi, tempatna eta loh, keren pisan\. Disainna oge unik, keren, merenah, merenah, cocog pisan kanggo tuang wengi sareng kulawargi, pasangan, dulur, sareng rerencangan, pamandanganna oge keren, tuangeunna oge raos-raos\. Pangaos saluyu sareng palayananna, teu nyesel ka dieu\. Disarankeun pisan\.|Mimiti ning kene kulawargi kuwi, panggonane kuwi, keren tenan\. Disaine uga unik, tenan, tenan, cocok tenan kanggo mangan wengi lan kulawargi, pasangan, dulur, lan kanca, panganane uga tenan, panganane uga enak-enak\. Disaranke ning kene\.|Kapisan marang mrene kuwi ngerayakake kelulusan adikku, panggonane kuwi loh, apik tenan\. Desaine uga unik, apik, kapenak, kapenak, cocok tenan kanggo mangan mbengi bareng kaluwarga, pasangan, sedulur, lan kanca-kanca, pemandangane uga apik, panganane uga enak-enak\. Regane sebanding karo pelayanane, ora gela marang mrene\. Bener-bener direkomendasikake\.|18\.554984102985628|0\.3486780678163579|\[-0\.20813209\]|
+|10|57|Rumah makan ieu tangtua kagolong mirah mung dibandikeun kanu rumah makan nu sanesna\. Mun tuangeun nu disayogikeun biasa wae teu aya nu istimewa\. Seseurna mah tuangeunna ngan lauk atawa hayam nu cara masak digoreng\. Tiasa disebat menu tuangeunna teu aya rupi-rupi sama sekali\.|Kanggonan iki tangtua kagolong nanging dibandikeun nanging rumah nanging enak\. Nanging panganan sing disayogikeun biasa nanging ora ana sing istimewa\. Seseure panganane nanging akeh nanging cara masak digoreng\. Isa disebat menu panganane ora ana enak sama sekali\.|Omah mangan iki mesthu kagolong murah yen dibandingake karo omah mangan sakjenise\. Nanging panganan sing disediakake biasa wae ora ana sing istimewa\. Akeh-akehe panganan mung iwak utawa oithik kanthi cara masak digoreng\. Bisa diomong menu panganane ora ana variasine blas\.|24\.78238686631454|0\.4625829755848479|\[-0\.13292158\]|
+|11|127|Dina restoran eta aya seeur pilihan tuangeun, mimiti ti nu mirah nepi nu awis|Aku restoran ana pilihan panganan, mimiti sing mirah nepi sing awis|Ing restoran kuwi kasadia akeh pilian panganan, mulai saka sing murah nganti sing larang|6\.632729312157198|0\.25306122448979596|\[-0\.14577435\]|
+|12|142|Kue patepang taun spesial nganggo endog sapiring ditambihan mozzarella kanggo anjeun|Kue patepang taun spesial nganggo endog sapiring ditambihan mozzarella kanggo ajeun|Roti ulang tahune spesial nganggo ndhog sakpiring ditambah mozzarella kanggo kowe|10\.600313379512592|0\.34090909090909094|\[-0\.0176141\]|
+|13|29|Tuangen di dieu raos-raos ku seueur rupi-rupi\. Sadayana raos ku pamandangan sae\. Palayanan nu maksimal ti mbak diah sareng gina ti mimiti sumping nepi rengse dilayanan ku sae pisan\.|Panggonane enak-enak\. Panganane enak enak karo pamandangane apik\. Panganane sing maksimal saka mbak diah lan gina saka mimiti sumping ngse dilayanane saka enak banget\.|Panganan ing kene enak-enak kanthi akeh variasine\. Kabehane enak kanthi pemandangan apik\. Pelayanane sing maksimal saka mbak diah lan gina saka ngewiwiti teka nganti rampung, dilayani kanthi apik tenan\.|23\.930559017896012|0\.37167352537722914|\[-0\.1293731\]|
+|14|244|Kafe ieu, ngagaduhan cemilan anu pang hadena, tahu ti lumboenk sareng volkano risols namina\. Sensasi unik tina panampilan anu sami ngajantenkeun hoyong deui hoyong deui, pikeun anu panasaran tiasa dicobian deh\.|Kafe iki, ngagaduhan cemilan sing hadena, tahu ora lumboenk lan volkano risols namine\. Sensasi unik sing panggonan sing ngajantenke sing nyaeta nyaeta nyaeta nyaeta nyaeta dicobian nyaeta\.|Kafe iki, nduwe pirang-pirang cemilan sing top banget, tahu ning lumboenk karo vulkano risols jenenge\. Sensasine unik saka wujude karo rasane nggarai sir maneh si maneh, dinggo sing penasaran oleh njajal wis\.|6\.312139612101272|0\.21669159243123737|\[-0\.20141259\]|
+|15|306|Saleresna nya sapertosna abdi teu ditakdirkeun nikmatan indomie goreng, padahal ngan ngulub miena lho\. Tiasa-tiasana leuleus teuing\.|Aku aku ora ditakdirke nikmatan indomie goreng, padahal nanging ngulub miene lho\. Teu-etiasane luwih\.|Mesthi ya kayane aku ora ditakdirake nikmati indomie goreng, sanadyan mung nggodhok mine lho\. Isa-isane kaliwat lembek\.|10\.844080760155272|0\.38071065989847713|\[-0\.27489597\]|
+|16|463|Kuciwa pisan\. Pesen sareng mayar tiket pesawat dienggalkeun tabuh satengah 1 enjing kanggo penerbangan jam 6 enjing\. E - tiket henteu dikirim\. Ngadadak dihubungi liwat email upami tiket nu tos dibayar tos seep dina waktos-waktos enjing\. Mung tiketna seep naha keneh bisa dibooking\.|Kuciwa banget\. Pesen lan mayar tiket pesawat satengah 1 enjing kanggo penerbangan jam 6 enjing\. E - tiket enjing dikirim\. Ngadadak dihubungi liwat email nanging tiket nanging dibayar nanging waktos-waktos enjing\. Nanging tikete akeh bisa dibooking\.|Kuciwa banget\. Pesen lan mbayar tiket motor mabur dilaksanakake jam setengah 1 isuk kanggo penerbangan jam6 isuk\. E - tiket ora dikirim\. Dumadakan dihubungi via email yen tiket sing uwis dibayar uwis entek jam-jam isuk\. Yen tikete entek ngapa egek isa dipesen\.|16\.33191451918006|0\.43979369011146585|\[-0\.1022194\]|
+|17|68|Hese ngartos jalma anu ngarasa osok bener|Hese ngartos jalma sing ngarasa osok bener|Angel banget ngerteni wong sing terus rumangsa pener|5\.693025330278465|0\.06329113924050632|\[-0\.32003397\]|
+|18|231|Satuju beuki naek fase wajar upami tiket naek\. Mung, pangaos dasar sawaktos fase panyisihan tos kaawisan\. Cobi bandingkeun pangaos lalajo di malaysia, thailand\.|Aku nyaeta fase wajar nanging tiket nyaeta\. Ngan, regane nyaeta fase nyisihan tiasa\. Cobi bandingke regane ning malaysia, thailand\.|Setuju saya munggah fase wajar yen tiket munggah\. Nanging, rega dasar ing pas fase penyisihan uwis kelarangan\. Coba bandingake rega nonton ing malaysia, thailand\.|11\.066171274883231|0\.35867446393762187|\[-0\.1297721\]|
+|19|198|Sumping ka restoran ieu teu aya bosenna, komo dina dinten wengi arurang sakulawargi resep pisan tempat ieu kumargi aya live musikna\. Suasanana teu gentos ti tahun ka tahun\. Menu nu disayogikeun ge keneh teteup sami, ti mimiti menu eropa nepi menu khas indonesia keneh memikat\. Porsina ge teu eleuh seueur\.|Panggonane iki ora ana bosene, komo ing dina wengi seneng banget panggonane iki kumargi ana live musike\. Suwasanane ora gentos ing tahun ing tahun\. Menu sing disayogikeun karo teteup sami, ora mimiti menu eropa nepi menu khas indonesia keneh memikat\. Porsine uga ora enak\.|Teko marang restoran iki ora ana bosene, apa maneh ini mbengi minggu dhewe sakaluwarga seneng tenan panggonan iki amarga ana live musike\. Suwasanane ora owah nahunan\. Menu sing disajikake egek tetep padha, saka mulai menu eropa nganti menu khas indonesia tetep nyengsemake\. Porsine uga ora kalah akeh\.|25\.624487697618193|0\.5047220501103666|\[-0\.18800953\]|
+|20|152|Hayang ka hotel nu di mongkok Hongkong, teu aya\! Sasih Juni kamari, kuring pesen sareng parantos mayar 2 kamar\. Tapi hotelna teu kapanggih\.|Aku hotel sing ning mongkok Hongkong, ora ana\! Sasih Juni kamari, kuring pesen lan pesen mayar 2 kamar\. Tapi hotelne ora kapanggih\.|Arep nyang hotel ning mongkok hongkong, ora ana\! Sasi juni wingi, aku mesen lan wis mbayar dingge 2 kamar\. Nanging hotele ora temu|15\.35259783865636|0\.5398582175925926|\[-0\.15853569\]|
 
-def predict_evaluate(data):
-    try:
-        sources = data['text_1']
-        targets = data['text_2']
-
-        predictions = [translator(prefix + source)[0]['translation_text'] for source in sources]
-
-        # Initialize lists to store results
-        predicts, accuracies, bleus, meteors, bertscore_precisions, bertscore_recalls, bertscore_f1s = [], [], [], [], [], [], []
-
-        for prediction, target in zip(predictions, targets):
-            predicts.append(prediction)
-
-            # Calculate accuracy for each prediction
-            accuracies.append(int(prediction == target))
-
-            # Compute sacreBLEU
-            bleu_result = sacrebleu_metric.compute(predictions=[prediction], references=[target])
-            bleus.append(bleu_result["score"])
-
-            # Compute METEOR
-            meteor_result = meteor_metric.compute(predictions=[prediction], references=[target])
-            meteors.append(meteor_result["meteor"])
-
-            # Compute BERTScore
-            bertscore_result = bertscore_metric.compute(predictions=[prediction], references=[target], lang="en")
-            bertscore_precisions.append(bertscore_result["precision"])
-            bertscore_recalls.append(bertscore_result["recall"])
-            bertscore_f1s.append(bertscore_result["f1"])
-
-        # Return a dictionary with lists as values
-        return {
-            "input": data['text_1'],
-            "predict": predicts,
-            "target": targets,
-            "accuracy": accuracies,  # Now a list of accuracies
-            "bleu": bleus,
-            "meteor": meteors,
-            "bertscore_precision": bertscore_precisions,
-            "bertscore_recall": bertscore_recalls,
-            "bertscore_f1": bertscore_f1s
-        }
-
-    except Exception as e:
-        print(f"Error during prediction or evaluation: {e}")
-        return None
-
-# Assuming test_dataset is correctly defined
-data_test_predict_eval = test_dataset.map(predict_evaluate, batched=True)
-
-```
-
-|index|id|text\_1|text\_2|text\_1\_lang|text\_2\_lang|text\_1\_length|text\_2\_length|input|predict|target|accuracy|bleu|meteor|bertscore\_precision|bertscore\_recall|bertscore\_f1|
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-|0|192|Piye ora nesu ora, kena php indosat terus kie\. Pulsane kepotong ludes ora ana turahe\.|Kumaha teu ambek coba, keuna php indosat wae euy\. Pulsa sok kapotong seep teu aya sesa\.|jav|sun|15|16|Piye ora nesu ora, kena php indosat terus kie\. Pulsane kepotong ludes ora ana turahe\.|Tempat teu teu teu teu, kena php indosat teu kieu\. Pulsana kepotong teu teu aya turahe\.|Kumaha teu ambek coba, keuna php indosat wae euy\. Pulsa sok kapotong seep teu aya sesa\.|0|6\.809398432036521|0\.33223684210526316|\[0\.88012719\]|\[0\.85503322\]|\[0\.86739874\]|
-|1|359|Rega ora patia larang, rasane uga enak, akeh pilian panganan khas Banjar liyane\.|Pangaosna teu awis teuing, rasana oge raos, seueur pilihan tuangeun khas Banjar nu sanes\.|jav|sun|13|14|Rega ora patia larang, rasane uga enak, akeh pilian panganan khas Banjar liyane\.|Abdi teu patia awis, rasana oge raos, abdi pilihan tuangeun khas Banjar liyana\.|Pangaosna teu awis teuing, rasana oge raos, seueur pilihan tuangeun khas Banjar nu sanes\.|0|38\.71493850247494|0\.6843770545693622|\[0\.91857773\]|\[0\.91643155\]|\[0\.91750336\]|
-|2|386|Hypermart saiki ngenehi diskon 20% kanggo produk seger saben dina senen - kemis kanthi mandiri kartu hypermart|Hypermart nuju masihan diskon 20% kanggo produk seger unggal dinten senen - kemis ku mandiri kartu hypermart|jav|sun|17|17|Hypermart saiki ngenehi diskon 20% kanggo produk seger saben dina senen - kemis kanthi mandiri kartu hypermart|Hypermart ayeuna ngeunah diskon 20% kanggo produk seger saben dina senen - kemis ku mandiri kartu hypermart|Hypermart nuju masihan diskon 20% kanggo produk seger unggal dinten senen - kemis ku mandiri kartu hypermart|0|60\.28817681965138|0\.7739512471655329|\[0\.93737841\]|\[0\.94295597\]|\[0\.9401589\]|
-|3|103|Resto iki aku rekomendasikake kanggo kowe tekani yen kowe pengen nyantap karo nikmati surup\. Amarga lokasine sing ana ing dhataran dhuwur, kowe iso nikmati kaendahan alam pegununungan lan suwasana kota\. Kanggo panganane dhewe ana sawetara cita rasa, saka masakan daerah, indonesia, nganti internasional\.|Resto ieu abdi sarankeun kanggo anjeun sumpingan mung anjeun hoyong tuang sabari nganikmatan sunset\. Kusabab letakna nu aya di dataran tinggi, anjeun tiasa nganikmatan kaendahan alam pagunungan sareng suasana kota\. Kanggo tuangeunnana ge aya sababaraha cita rasa, ti masakan daerah, Indonesia, nepi internasional\.|jav|sun|43|43|Resto iki aku rekomendasikake kanggo kowe tekani yen kowe pengen nyantap karo nikmati surup\. Amarga lokasine sing ana ing dhataran dhuwur, kowe iso nikmati kaendahan alam pegununungan lan suwasana kota\. Kanggo panganane dhewe ana sawetara cita rasa, saka masakan daerah, indonesia, nganti internasional\.|Resto ieu abdi rekomendasikakeun kanggo abdi tuangeun nyantap abdi nikmati surup\. Abdi lokasina nu aya di dhataran tuangeun, abdi iso nikmati kaendahan alam pagununungan sareng suasana kota\. Kanggo tuangeunna aya sawetara cita rasa, ti masakan daerah, Indosia, nganti internasional\.|Resto ieu abdi sarankeun kanggo anjeun sumpingan mung anjeun hoyong tuang sabari nganikmatan sunset\. Kusabab letakna nu aya di dataran tinggi, anjeun tiasa nganikmatan kaendahan alam pagunungan sareng suasana kota\. Kanggo tuangeunnana ge aya sababaraha cita rasa, ti masakan daerah, Indonesia, nepi internasional\.|0|26\.146956379552613|0\.5204599761051375|\[0\.89048052\]|\[0\.88968354\]|\[0\.89008188\]|
-|4|61|Mangan sikil wedus bagian pupu sing empuk lan lumayan gedhi dinggo ukuran medium, pas dingge wong siji, mangan tanpa sega, karo es lemon tea\. Seger kurange mung panggone kebul-kebul, wajar kan jenenge uga wedus bakar hehehe|Tuang suku domba pingpingna hipu sareng gede pikeun ukuran sedeng, pas pikeun hiji jalmi, tuangna teu nganggo sangu, kalayan es lemon tea\. Seger, hiji-hijina kakurangannana nyaeta tempatna loba haseup, wajarlah namina oge domba bakar hehehe|jav|sun|36|35|Mangan sikil wedus bagian pupu sing empuk lan lumayan gedhi dinggo ukuran medium, pas dingge wong siji, mangan tanpa sega, karo es lemon tea\. Seger kurange mung panggone kebul-kebul, wajar kan jenenge uga wedus bakar hehehe|Tuang sikil wedus bagian pupu nu kusabab sareng lumayan kusabab ukuran medium, pas tuangeun tuangeun sahiji, tuangeun tanpa sae, ku es lemon tea\. Seger kurange ngan tuangeun kebul-kebul, wajar sareng na oge wedus bakar hehehe|Tuang suku domba pingpingna hipu sareng gede pikeun ukuran sedeng, pas pikeun hiji jalmi, tuangna teu nganggo sangu, kalayan es lemon tea\. Seger, hiji-hijina kakurangannana nyaeta tempatna loba haseup, wajarlah namina oge domba bakar hehehe|0|12\.415687674080344|0\.32763791259168706|\[0\.87924463\]|\[0\.86076641\]|\[0\.86990744\]|
 
 
 ```python
-predict_eval_df['bleu'].mean()
-predict_eval_df['meteor'].mean()
+display(predict_eval_df['bleu'].mean())
+display(predict_eval_df['meteor'].mean())
+display(predict_eval_df['bleurt'].mean())
 ```
 ```powershell
-18.092717876126102
-0.4190095152615721
+15.334266604564634
+
+0.3900363024364832
+
+array([-0.13708009])
 ```
+
+
+# Datasets
+- https://huggingface.co/datasets/indonlp/NusaX-MT
+- https://github.com/IndoNLP/nusax
+- https://ar5iv.labs.arxiv.org/html/2205.15960
+- https://data.statmt.org/cc-100/
+
+# References
+
+- https://github.com/huggingface/transformers/tree/main/examples/pytorch/translation
+- https://colab.research.google.com/github/huggingface/notebooks/blob/main/examples/translation.ipynb#scrollTo=X4cRE8IbIrIV
+- https://huggingface.co/docs/transformers/tasks/translation
+- https://huggingface.co/docs/transformers/model_doc/t5
+- https://github.com/EliasK93/transformer-models-for-domain-specific-machine-translation
+- https://huggingface.co/docs/transformers/model_doc/marian#old-style-multi-lingual-models
+- https://www.mdpi.com/2227-7390/11/4/1006
+- https://huggingface.co/spaces/evaluate-metric/bertscore#:~:text=Metric%20description,token%20in%20the%20reference%20sentence
+- https://huggingface.co/spaces/evaluate-metric/bleurt
 
