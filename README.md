@@ -1,139 +1,31 @@
-# Indonesian Local Machine Translation
+# Indonesian LocalX Machine Translation
 
 ## Overview
 
 Welcome to the documentation of our experimental project, which focuses on developing a machine translation system for local Indonesian languages. With more than 17,000 islands, 360 ethnic groups, and 840 regional languages, Indonesia faces unique challenges in communication and socialization between its people. This project aims to bridge this communication gap by creating a translation engine that can facilitate daily interactions.
 
-We use datasets from [NusaX](https://huggingface.co/datasets/indonlp/NusaX-MT) and [CC100](https://metatext.io/datasets/cc100), as well as pretrained models from Transformers. The NusaX dataset includes 12 labeled languages, including Indonesian, English, and 10 regional Indonesian languages, namely Acehnese, Balinese, Banjarese, Bugis, Madurese, Minangkabau, Javanese, Ngaju, Sundanese, and Toba Batak. The CC100 dataset, which includes around 100 languages, is focused on Javanese and Sundanese for the current translation focus, given the limitations of the dataset for other regional languages.
+We use datasets from [NusaX](https://huggingface.co/datasets/indonlp/NusaX-MT) and [CC100](https://metatext.io/datasets/cc100) for Sundanese and Javanese, as well as pretrained models from Transformers. The NusaX dataset includes 12 labeled languages, including Indonesian, English, and 10 regional Indonesian languages, namely Acehnese, Balinese, Banjarese, Bugis, Madurese, Minangkabau, Javanese, Ngaju, Sundanese, and Toba Batak. The CC100 dataset, which includes around 100 languages, but is just for Translation on Javanese and Sundanese , given the limitations of the dataset for other regional languages.
 
 
-## Exploratory Datasets Anaylis
+## EDA
 
-### [NusaX-MT](https://huggingface.co/datasets/indonlp/NusaX-MT) Sundanese & Javanese
-
-#### Language Distribution
-![image](https://github.com/zanuura/Indonesian-Local-Machine-Translation/assets/73764446/45409578-49f8-4fb1-8cef-65d8af605363)
-<!-- ![image](https://github.com/zanuura/Indonesian-Local-Machine-Translation/assets/73764446/6b740fc1-ba3d-4aa0-8b9b-81a1eaf548b6)-->
-
-#### Most Common Words
-```git
-Most Common Words in Javanese:
-[('sing', 667), ('lan', 555), ('ora', 450), ('karo', 328), ('aku', 302), ('ing', 285), ('ning', 265), ('kanggo', 240), ('mangan', 219), ('iki', 205)]
-
-Most Common Words in Sundanese:
-[('nu', 615), ('sareng', 542), ('di', 457), ('teu', 375), ('abdi', 314), ('ka', 247), ('aya', 216), ('anu', 214), ('kanggo', 198), ('ku', 192)]
-```
-
-![image](https://github.com/zanuura/Indonesian-Local-Machine-Translation/assets/73764446/ad85fa79-134a-47ee-814f-29ae46f37b8b)
-
-#### N-Gram Analyis
-Bigrams : 
-```git
-[('ora ana', 34),
- ('enak lan', 30),
- ('mangan ning', 27),
- ('ora isa', 26),
- ('panganan sing', 24),
- ('ana ing', 24),
- ('lan ora', 21),
- ('ing kene', 20),
- ('sing apik', 20),
- ('sing ora', 20)]
-####################
-[('di dieu', 40),
- ('tuang di', 37),
- ('teu aya', 37),
- ('ka dieu', 27),
- ('sumping ka', 27),
- ('tempat ieu', 24),
- ('tuangeun nu', 24),
- ('teu tiasa', 24),
- ('di tempat', 23),
- ('di dieu.', 21)]
-```
-
-<!-- Trigrams : 
-```git
-[('ora ana', 34),
- ('enak lan', 30),
- ('mangan ning', 27),
- ('ora isa', 26),
- ('panganan sing', 24),
- ('ana ing', 24),
- ('lan ora', 21),
- ('ing kene', 20),
- ('sing apik', 20),
- ('sing ora', 20)]
-####################
-[('di dieu', 40),
- ('tuang di', 37),
- ('teu aya', 37),
- ('ka dieu', 27),
- ('sumping ka', 27),
- ('tempat ieu', 24),
- ('tuangeun nu', 24),
- ('teu tiasa', 24),
- ('di tempat', 23),
- ('di dieu.', 21)]
-``` -->
-
-#### WordClouds
-Javanese : 
-![image](https://github.com/zanuura/Indonesian-Local-Machine-Translation/assets/73764446/0c982cfe-df2a-41ca-a30c-7158323cbdfc)
-
-Sundanese : 
-![image](https://github.com/zanuura/Indonesian-Local-Machine-Translation/assets/73764446/3fa8d94a-7d01-4720-9079-202b903c02bb)
-
-### CC100 Sundanese & Javanese
-
-#### Most Common Words
-
-```git
-Sundanese:
-Most common 10 words: [('nu', 155200), ('jeung', 144216), ('anu', 120012), ('ka', 100481), ('di', 100409), ('dina', 96300), ('ku', 79068), ('teu', 66070), ('anjeun', 66057), ('ieu', 66034)]
-
-Javanese:
-Most common 10 words: [('ing', 149417), ('lan', 101946), ('sing', 67811), ('kang', 64528), ('ora', 44236), ('iku', 42325), ('kanggo', 40798), ('iki', 37851), ('ingkang', 37518), ('wong', 34040)]
-```
-
-#### WordClouds
-Sundanese : 
-![image](https://github.com/zanuura/Indonesian-Local-Machine-Translation/assets/73764446/21e51678-264a-4128-a8e9-fd300516d271)
-
-Javanese : 
-![image](https://github.com/zanuura/Indonesian-Local-Machine-Translation/assets/73764446/89f27658-dd0a-4216-95d8-9f75db647e8f)
+<p align="center">
+  <img src="https://github.com/zanuura/Indonesian-Local-Machine-Translation/assets/73764446/e09e7dd8-7b83-4a39-aa32-40560056550a" alt="EDA-english" width="300" />
+  <img src="https://github.com/zanuura/Indonesian-Local-Machine-Translation/assets/73764446/c314833f-4eaa-4088-81b5-de8ff54ec1e6" alt="EDA-indonesian" width="300" />
+  <img src="https://github.com/zanuura/Indonesian-Local-Machine-Translation/assets/73764446/138b90b9-9469-4ccb-9ad0-4f6466a832c4" alt="EDA-acehnese" width="300" />
+  <img src="https://github.com/zanuura/Indonesian-Local-Machine-Translation/assets/73764446/2c4e0c08-b09f-403d-8c57-bea02ba36bac" alt="EDA-balinese" width="300" />
+  <img src="https://github.com/zanuura/Indonesian-Local-Machine-Translation/assets/73764446/587ce208-795e-4f86-9dc9-9215e2ba758f" alt="EDA-banjarese" width="300" />
+  <img src="https://github.com/zanuura/Indonesian-Local-Machine-Translation/assets/73764446/11ba4125-379c-4b57-9454-892b192dde80" alt="EDA-buginese" width="300" />
+  <img src="https://github.com/zanuura/Indonesian-Local-Machine-Translation/assets/73764446/de9935e1-b827-4542-864c-de20dc0df221" alt="EDA-javanese" width="300" />
+  <img src="https://github.com/zanuura/Indonesian-Local-Machine-Translation/assets/73764446/a31f129d-e2f4-4822-a357-7da909620023" alt="EDA-madurese" width="300" />
+  <img src="https://github.com/zanuura/Indonesian-Local-Machine-Translation/assets/73764446/8147477f-83ca-483d-af8c-bb7232a9767d" alt="EDA-minangkabau" width="300" />
+  <img src="https://github.com/zanuura/Indonesian-Local-Machine-Translation/assets/73764446/2002c4e2-81f3-4a75-a33a-bee11ab384db" alt="EDA-ngaju" width="300" />
+  <img src="https://github.com/zanuura/Indonesian-Local-Machine-Translation/assets/73764446/c183bb25-830a-4add-b9ed-0d528f055665" alt="EDA-sundanese" width="300" />
+  <img src="https://github.com/zanuura/Indonesian-Local-Machine-Translation/assets/73764446/9223824a-25f6-443d-90fb-6d69f125c96e" alt="EDA-toba_batak" width="300" />
+</p>
 
 
-### Training
-
-```python
-training_args = Seq2SeqTrainingArguments(
-    output_dir="T5_NusaX_Sun_Jav_checkpoints",
-    evaluation_strategy="epoch",
-    learning_rate=2e-5,
-    per_device_train_batch_size=16,
-    per_device_eval_batch_size=16,
-    weight_decay=0.01,
-    save_total_limit=5,
-    num_train_epochs=200,
-    predict_with_generate=True,
-    fp16=True,
-)
-
-trainer = Seq2SeqTrainer(
-    model=model,
-    args=training_args,
-    train_dataset=tokenized_nusax_train,
-    eval_dataset=tokenized_nusax_valid,
-    tokenizer=tokenizer,
-    data_collator=data_collator,
-    compute_metrics=compute_metrics,
-)
-
-trainer.train()
-```
-
-### Test Predict Evaluate
+## Test Predict Sundanese Javanese
 
 20 Row from 200
 |index|id|input|predict|target|bleu|meteor|bleurt|
@@ -179,6 +71,9 @@ As can be seen, the accuracy of our system is still not optimal, which is caused
 
 Thank you for visiting our project. For more detailed information about the dataset, references and how to use the system, please visit the following links:
 
+# Notebooks
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1R1LuIVanYgrU2nTWoY_qWEfTglu68-9E?usp=sharing]) If you want to try several languages.
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1x4Cf1YJwgAbMd1EpbvafBdB4IC_w-94j?usp=sharing]) If you want train all availabel languages in NusaX.
 
 # Datasets
 - https://huggingface.co/datasets/indonlp/NusaX-MT
