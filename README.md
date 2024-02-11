@@ -49,9 +49,31 @@ encoded: {'input_ids': tensor([[ 3425,   128, 17921,  9309,   114,  5676,   137,
 decoded: Translate Acehnese to Balinese : Lon cemburu meueu awak droen jeuet neurasa bahgia.</s>
 ```
 
-## Model Develpment
+## Model Development
 
-We opted to use the pretrained T5-small model due to its ease of use and efficiency during training, making it well-suited for our project's requirements.
+In the process of creating the Indonesian LocalX Machine Translation engine, we prioritized efficiency and effectiveness. Our journey led us to adopt the T5-small model, renowned for its balance between performance and computational efficiency, making it an ideal choice for our project's goals.
+
+### Selection of the Pretrained T5-Small Model
+
+The decision to utilize the T5-small model was driven by its proven capabilities in understanding and generating human-like text. This model, while compact, packs a powerful punch, offering a sweet spot in terms of performance and resource requirements. Its architecture is designed to handle a variety of text-based tasks, which made it a compelling option for tackling the intricate nuances of Indonesian local languages.
+
+### Unsupervised Learning Adaptations
+
+Our venture into unsupervised learning techniques marked a significant pivot in our approach. We leveraged the CC100 dataset, focusing on Sundanese and Javanese languages, to train the T5-small model in an unsupervised manner. This strategy was born out of necessity, as our initial supervised learning attempts stumbled upon challenges, notably producing outputs that inadvertently blended unrelated languages, such as English, into the translations.
+
+The unsupervised learning approach allowed the model to explore the linguistic structures and vocabularies of Sundanese and Javanese without explicit parallel text examples. By doing so, it aimed to develop an intrinsic understanding of the translation task, relying on the inherent similarities and differences between the languages.
+
+[Notebook](machine-translation/T5_small_Unsupervised_Learning_CC100_SU_JV.ipynb)
+
+### Challenges and Solutions
+
+The journey was not without its hurdles. One significant challenge was the model's occasional inclination to generate translations that included fragments of languages not relevant to the task at hand. To mitigate this, we embarked on a series of iterative training and testing cycles, fine-tuning the model's parameters, and enhancing the pre-processing steps to better align with our translation objectives.
+
+We also encountered limitations related to dataset quality and computational resources. These constraints sometimes hindered the model's ability to capture the full complexity of the languages involved. In response, we adopted a pragmatic approach, focusing on incremental improvements and seeking out additional datasets that could enrich the model's training environment.
+
+### Forward Steps
+
+Despite these challenges, the preliminary outcomes are promising. The model has demonstrated a capacity to facilitate translations between Sundanese and Javanese, albeit with room for refinement. Our ongoing efforts are directed towards expanding the dataset, incorporating more sophisticated unsupervised learning techniques, and exploring the potential of scaling up the model architecture.
 
 
 ## Predict
@@ -67,6 +89,8 @@ Translation Sundanese-Javanese
 |3|200|Tuangeun india numutkeun abdi teu raos\. Seueur teuing rempah|Panganan indi aku ora enak\. Ora ora rempah|Panganan india miturut ku ora enak\. Kakehan bumbon|19\.070828081828378|0\.3506944444444444|\[-0\.37893215\]|
 |4|462|Tagihan internet abdi teu lebet kanu akal 250% leuwih awis kakak\! Peryogi penjelasan\.|Tagihan internet aku ora akal 250% leuwih saka\! Peryogi penjelasan\.|Tagihan internetku ora mlebu akal 250% luwih larang kang\! Njaluk penjelasan\.|15\.05770286076146|0\.505283273381295|\[0\.18163721\]|
 |5|122|baheula resep pisan tuang di dieu dina sami waktosna di Jakarta, nembe terang yen aya oge di Bandung\. Tempatna sae pisan\. Aya seueur pilihan suasana anu tiasa dipilih, naha di luar, di jero rohangan, ngaroko atanapi henteu, aya tempat pikeun sadaya jinis tamu\. Dahareunana oge raos\. Siga pasta-pasta ala urang Indonesia\.|Aku seneng banget mangan ning kene ning karo wektu, nembe terang ana uga ning bandung\. Panggonane apik banget\. Aya seueur pilihan suwasane sing isa dipilih, nanging jero rohangan, nggawe akeh, ana panggonane sadaya jinis tamu\. Dahareunane uga enak\. Siga pasta-pasta enak\.|Biyen aku seneng banget mangan ning kene wektu podo ning jakarta, lagek eruh lak ning bandung uga ana\. Panggone enak banget\. Akeh pilihan kahanan sing isa dipilih, sir ning jaba, jero, ngrokok utawa ngge ora, ana panggon dinggo kabeh jenis wong moro\. Panganane uga enak seh\. Ya pasta-pasta ala wong indonesia\.|13\.997172942497256|0\.4161971820190063|\[-0\.17970386\]|
+
+The accuracy from Sundanese-Javanese/Javanese-Sundanese is more good that other task translation dor local languages since we doing unsupervised learning to T5-small model.
 
 
 ```python
