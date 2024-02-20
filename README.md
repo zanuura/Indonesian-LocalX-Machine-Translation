@@ -2,12 +2,14 @@
 
 ## Overview
 
-Welcome to the documentation of our experimental project, which focuses on developing a machine translation system for local Indonesian languages. With more than 17,000 islands, 360 ethnic groups, and 840 regional languages, Indonesia faces unique challenges in communication and socialization between its people. This project aims to bridge this communication gap by creating a translation engine that can facilitate daily interactions.
+Welcome to the documentation of the Indonesian LocalX Machine Translation project, an innovative endeavor aimed at developing a robust machine translation system for the diverse local languages of Indonesia. Given Indonesia's rich linguistic landscape, characterized by over 17,000 islands, 360 ethnic groups, and 840 regional languages, communication poses a significant challenge, hindering socialization and understanding among its people. Our project seeks to mitigate these challenges by creating an advanced translation engine designed to facilitate seamless daily interactions across the myriad of local languages.
 
-We use datasets from [NusaX](https://huggingface.co/datasets/indonlp/NusaX-MT) and [CC100](https://metatext.io/datasets/cc100) for Sundanese and Javanese, as well as pretrained models from Transformers. The NusaX dataset includes 12 labeled languages, including Indonesian, English, and 10 regional Indonesian languages, namely Acehnese, Balinese, Banjarese, Bugis, Madurese, Minangkabau, Javanese, Ngaju, Sundanese, and Toba Batak. The CC100 dataset, which includes around 100 languages, but is just for Translation on Javanese and Sundanese , given the limitations of the dataset for other regional languages.
+## Datasets
+
+We use datasets from [NusaX](https://huggingface.co/datasets/indonlp/NusaX-MT) and [CC100](https://metatext.io/datasets/cc100) for Sundanese and Javanese, as well as pretrained models from Transformers. The NusaX dataset includes 12 labeled languages, including Indonesian, English, and 10 regional Indonesian languages, namely Acehnese, Balinese, Banjarese, Bugis, Madurese, Minangkabau, Javanese, Ngaju, Sundanese, and Toba Batak. The CC100 dataset, which includes around 100 languages, but we just use Javanese and Sundanese for Translation on Javanese to Sundanese vise versa, given the limitations of the dataset for other regional languages on CC100.
 
 
-## EDA
+## Exploratory Data Analysis (EDA)
 
 <p align="center">
   <img src="https://github.com/zanuura/Indonesian-Local-Machine-Translation/assets/73764446/e09e7dd8-7b83-4a39-aa32-40560056550a" alt="EDA-english" width="300" />
@@ -24,10 +26,61 @@ We use datasets from [NusaX](https://huggingface.co/datasets/indonlp/NusaX-MT) a
   <img src="https://github.com/zanuura/Indonesian-Local-Machine-Translation/assets/73764446/9223824a-25f6-443d-90fb-6d69f125c96e" alt="EDA-toba_batak" width="300" />
 </p>
 
+## Training T5tokenizer
 
-## Test Predict Sundanese Javanese
+After several iterations and learning from initial setbacks, we concluded that training the T5 tokenizer was essential. The original T5 tokenizer lacked the vocabulary necessary for accurately capturing the nuances of Indonesian local languages. Therefore, we expanded the tokenizer's vocabulary by adding 1,000 new entries using the NusaX dataset, enhancing its ability to understand and process these languages.
 
-20 Row from 200
+## Dataset Pre-processing
+
+Our preprocessing pipeline includes appending specific prefixes (e.g., "Translate Sundanese-Javanese:") to input texts to guide the T5 model in understanding the translation task. We divided the dataset into training, testing, and validation sets with an 80/10/10 split and analyzed the language distribution within these splits to ensure a balanced representation.
+
+<p align="center">
+  <img src="https://github.com/zanuura/Indonesian-LocalX-Machine-Translation/assets/73764446/d78ba9ba-ef9e-4743-950f-dc61bec537f6" alt="TRAIN" width="200" />
+  <img src="https://github.com/zanuura/Indonesian-LocalX-Machine-Translation/assets/73764446/cac10a6a-efb3-49f7-9247-526fa28aaac9" alt="TEST" width="200" />
+  <img src="https://github.com/zanuura/Indonesian-LocalX-Machine-Translation/assets/73764446/7b047509-bec5-42c9-94da-f8bb107d9cdc" alt="VAL" width="200" />
+</p>
+
+Subsequently, we tokenized the dataset using the newly trained T5 tokenizer and conducted tests to verify the functionality of the encoder and decoder.
+```
+encoded: {'input_ids': tensor([[ 3425,   128, 17921,  9309,   114,  5676,   137,  1510,  5676,   104,
+           379,   707,  2711,   608,   108,   115,   262, 13179,   104,   430,
+           104, 14590,   106,  1255,   122,   109,   106,   103,     1]]), 'attention_mask': tensor([[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+         1, 1, 1, 1, 1]])}
+decoded: Translate Acehnese to Balinese : Lon cemburu meueu awak droen jeuet neurasa bahgia.</s>
+```
+
+## Model Development
+
+In the process of creating the Indonesian LocalX Machine Translation engine, we prioritized efficiency and effectiveness. Our journey led us to adopt the T5-small model, renowned for its balance between performance and computational efficiency, making it an ideal choice for our project's goals.
+
+### Selection of the Pretrained T5-Small Model
+
+The decision to utilize the T5-small model was driven by its proven capabilities in understanding and generating human-like text. This model, while compact, packs a powerful punch, offering a sweet spot in terms of performance and resource requirements. Its architecture is designed to handle a variety of text-based tasks, which made it a compelling option for tackling the intricate nuances of Indonesian local languages.
+
+### Unsupervised Learning Adaptations
+
+Our venture into unsupervised learning techniques marked a significant pivot in our approach. We leveraged the CC100 dataset, focusing on Sundanese and Javanese languages, to train the T5-small model in an unsupervised manner. This strategy was born out of necessity, as our initial supervised learning attempts stumbled upon challenges, notably producing outputs that inadvertently blended unrelated languages, such as English, into the translations.
+
+The unsupervised learning approach allowed the model to explore the linguistic structures and vocabularies of Sundanese and Javanese without explicit parallel text examples. By doing so, it aimed to develop an intrinsic understanding of the translation task, relying on the inherent similarities and differences between the languages.
+
+[Notebook](machine-translation/T5_small_Unsupervised_Learning_CC100_SU_JV.ipynb)
+
+### Challenges and Solutions
+
+The journey was not without its hurdles. One significant challenge was the model's occasional inclination to generate translations that included fragments of languages not relevant to the task at hand. To mitigate this, we embarked on a series of iterative training and testing cycles, fine-tuning the model's parameters, and enhancing the pre-processing steps to better align with our translation objectives.
+
+We also encountered limitations related to dataset quality and computational resources. These constraints sometimes hindered the model's ability to capture the full complexity of the languages involved. In response, we adopted a pragmatic approach, focusing on incremental improvements and seeking out additional datasets that could enrich the model's training environment.
+
+### Forward Steps
+
+Despite these challenges, the preliminary outcomes are promising. The model has demonstrated a capacity to facilitate translations between Sundanese and Javanese, albeit with room for refinement. Our ongoing efforts are directed towards expanding the dataset, incorporating more sophisticated unsupervised learning techniques, and exploring the potential of scaling up the model architecture.
+
+
+## Predict
+
+Our system was put to the test with translation tasks between Sundanese and Javanese. The evaluation metrics used were BLEU, METEOR, and BLEURT scores, which provided insights into the translation quality. Although the results indicate that our system's accuracy needs improvement, primarily due to dataset limitations and computational constraints, we are optimistic about the model's potential with access to more extensive resources and advanced computational power.
+
+Translation Sundanese-Javanese
 |index|id|input|predict|target|bleu|meteor|bleurt|
 |---|---|---|---|---|---|---|---|
 |0|330|Karya bakti bca finance posisi relationship officer muka lowongan kanggo panempatan Pekanbaru|Karya bakti bca finance posisi relationship officer muka lowongan kanggo kusabab pekanbaru|Karya bakti bca finance posisi relationship officer mbukak lowongan dingge manggon pekanbaru|54\.91004867761124|0\.7361111111111112|\[0\.39940304\]|
@@ -36,22 +89,8 @@ We use datasets from [NusaX](https://huggingface.co/datasets/indonlp/NusaX-MT) a
 |3|200|Tuangeun india numutkeun abdi teu raos\. Seueur teuing rempah|Panganan indi aku ora enak\. Ora ora rempah|Panganan india miturut ku ora enak\. Kakehan bumbon|19\.070828081828378|0\.3506944444444444|\[-0\.37893215\]|
 |4|462|Tagihan internet abdi teu lebet kanu akal 250% leuwih awis kakak\! Peryogi penjelasan\.|Tagihan internet aku ora akal 250% leuwih saka\! Peryogi penjelasan\.|Tagihan internetku ora mlebu akal 250% luwih larang kang\! Njaluk penjelasan\.|15\.05770286076146|0\.505283273381295|\[0\.18163721\]|
 |5|122|baheula resep pisan tuang di dieu dina sami waktosna di Jakarta, nembe terang yen aya oge di Bandung\. Tempatna sae pisan\. Aya seueur pilihan suasana anu tiasa dipilih, naha di luar, di jero rohangan, ngaroko atanapi henteu, aya tempat pikeun sadaya jinis tamu\. Dahareunana oge raos\. Siga pasta-pasta ala urang Indonesia\.|Aku seneng banget mangan ning kene ning karo wektu, nembe terang ana uga ning bandung\. Panggonane apik banget\. Aya seueur pilihan suwasane sing isa dipilih, nanging jero rohangan, nggawe akeh, ana panggonane sadaya jinis tamu\. Dahareunane uga enak\. Siga pasta-pasta enak\.|Biyen aku seneng banget mangan ning kene wektu podo ning jakarta, lagek eruh lak ning bandung uga ana\. Panggone enak banget\. Akeh pilihan kahanan sing isa dipilih, sir ning jaba, jero, ngrokok utawa ngge ora, ana panggon dinggo kabeh jenis wong moro\. Panganane uga enak seh\. Ya pasta-pasta ala wong indonesia\.|13\.997172942497256|0\.4161971820190063|\[-0\.17970386\]|
-|6|97|Abdi teu kuciwa ka produk apple|Aku ora kuciwa ka produk apple|Aku ora kuciwa karo produke apple|32\.46679154750991|0\.8066666666666668|\[0\.60135025\]|
-|7|2|Kangkungna lumayan mung kepiting saos padangna nguciwakeun arurang dipasihan kepiting anu kopong ahirna arurang teu tuang kepitingna sareng dibalikkeun\.|Kanggonane lumayan nanging nguciwakeun awakdewe dipasihan awakdewe ora mangan awakdewe lan dibalikkeun\.|Kangkunge lumayan nanging yuyu saus padange nguciwakake dhewe dikei yuyu sing kopong akhir dhewe ora mangan yuyune lan dibalekake\.|5\.643423197451416|0\.26482440990213013|\[-0\.15498953\]|
-|8|493|Parah pisan kuring mesen di bukalapak nganggo gosend kamari nepi ayeuna teu acan sumping kumaha ieu\. Barangna peryogi pisan|Abdi mesen ning bukalapak nganggo gosend nyaeta ora acan kumaha iki\. Panganane peryogi banget|Nemen pesen bukalapak nanggo gosend dekwingi sampek saiki durung teka piye iki\. Butuh barange banget|6\.1827411661290235|0\.23396226415094337|\[-0\.15670584\]|
-|9|174|Mimiti ka dieu eta ngarayakeun kalulusan rai abdi, tempatna eta loh, keren pisan\. Disainna oge unik, keren, merenah, merenah, cocog pisan kanggo tuang wengi sareng kulawargi, pasangan, dulur, sareng rerencangan, pamandanganna oge keren, tuangeunna oge raos-raos\. Pangaos saluyu sareng palayananna, teu nyesel ka dieu\. Disarankeun pisan\.|Mimiti ning kene kulawargi kuwi, panggonane kuwi, keren tenan\. Disaine uga unik, tenan, tenan, cocok tenan kanggo mangan wengi lan kulawargi, pasangan, dulur, lan kanca, panganane uga tenan, panganane uga enak-enak\. Disaranke ning kene\.|Kapisan marang mrene kuwi ngerayakake kelulusan adikku, panggonane kuwi loh, apik tenan\. Desaine uga unik, apik, kapenak, kapenak, cocok tenan kanggo mangan mbengi bareng kaluwarga, pasangan, sedulur, lan kanca-kanca, pemandangane uga apik, panganane uga enak-enak\. Regane sebanding karo pelayanane, ora gela marang mrene\. Bener-bener direkomendasikake\.|18\.554984102985628|0\.3486780678163579|\[-0\.20813209\]|
-|10|57|Rumah makan ieu tangtua kagolong mirah mung dibandikeun kanu rumah makan nu sanesna\. Mun tuangeun nu disayogikeun biasa wae teu aya nu istimewa\. Seseurna mah tuangeunna ngan lauk atawa hayam nu cara masak digoreng\. Tiasa disebat menu tuangeunna teu aya rupi-rupi sama sekali\.|Kanggonan iki tangtua kagolong nanging dibandikeun nanging rumah nanging enak\. Nanging panganan sing disayogikeun biasa nanging ora ana sing istimewa\. Seseure panganane nanging akeh nanging cara masak digoreng\. Isa disebat menu panganane ora ana enak sama sekali\.|Omah mangan iki mesthu kagolong murah yen dibandingake karo omah mangan sakjenise\. Nanging panganan sing disediakake biasa wae ora ana sing istimewa\. Akeh-akehe panganan mung iwak utawa oithik kanthi cara masak digoreng\. Bisa diomong menu panganane ora ana variasine blas\.|24\.78238686631454|0\.4625829755848479|\[-0\.13292158\]|
-|11|127|Dina restoran eta aya seeur pilihan tuangeun, mimiti ti nu mirah nepi nu awis|Aku restoran ana pilihan panganan, mimiti sing mirah nepi sing awis|Ing restoran kuwi kasadia akeh pilian panganan, mulai saka sing murah nganti sing larang|6\.632729312157198|0\.25306122448979596|\[-0\.14577435\]|
-|12|142|Kue patepang taun spesial nganggo endog sapiring ditambihan mozzarella kanggo anjeun|Kue patepang taun spesial nganggo endog sapiring ditambihan mozzarella kanggo ajeun|Roti ulang tahune spesial nganggo ndhog sakpiring ditambah mozzarella kanggo kowe|10\.600313379512592|0\.34090909090909094|\[-0\.0176141\]|
-|13|29|Tuangen di dieu raos-raos ku seueur rupi-rupi\. Sadayana raos ku pamandangan sae\. Palayanan nu maksimal ti mbak diah sareng gina ti mimiti sumping nepi rengse dilayanan ku sae pisan\.|Panggonane enak-enak\. Panganane enak enak karo pamandangane apik\. Panganane sing maksimal saka mbak diah lan gina saka mimiti sumping ngse dilayanane saka enak banget\.|Panganan ing kene enak-enak kanthi akeh variasine\. Kabehane enak kanthi pemandangan apik\. Pelayanane sing maksimal saka mbak diah lan gina saka ngewiwiti teka nganti rampung, dilayani kanthi apik tenan\.|23\.930559017896012|0\.37167352537722914|\[-0\.1293731\]|
-|14|244|Kafe ieu, ngagaduhan cemilan anu pang hadena, tahu ti lumboenk sareng volkano risols namina\. Sensasi unik tina panampilan anu sami ngajantenkeun hoyong deui hoyong deui, pikeun anu panasaran tiasa dicobian deh\.|Kafe iki, ngagaduhan cemilan sing hadena, tahu ora lumboenk lan volkano risols namine\. Sensasi unik sing panggonan sing ngajantenke sing nyaeta nyaeta nyaeta nyaeta nyaeta dicobian nyaeta\.|Kafe iki, nduwe pirang-pirang cemilan sing top banget, tahu ning lumboenk karo vulkano risols jenenge\. Sensasine unik saka wujude karo rasane nggarai sir maneh si maneh, dinggo sing penasaran oleh njajal wis\.|6\.312139612101272|0\.21669159243123737|\[-0\.20141259\]|
-|15|306|Saleresna nya sapertosna abdi teu ditakdirkeun nikmatan indomie goreng, padahal ngan ngulub miena lho\. Tiasa-tiasana leuleus teuing\.|Aku aku ora ditakdirke nikmatan indomie goreng, padahal nanging ngulub miene lho\. Teu-etiasane luwih\.|Mesthi ya kayane aku ora ditakdirake nikmati indomie goreng, sanadyan mung nggodhok mine lho\. Isa-isane kaliwat lembek\.|10\.844080760155272|0\.38071065989847713|\[-0\.27489597\]|
-|16|463|Kuciwa pisan\. Pesen sareng mayar tiket pesawat dienggalkeun tabuh satengah 1 enjing kanggo penerbangan jam 6 enjing\. E - tiket henteu dikirim\. Ngadadak dihubungi liwat email upami tiket nu tos dibayar tos seep dina waktos-waktos enjing\. Mung tiketna seep naha keneh bisa dibooking\.|Kuciwa banget\. Pesen lan mayar tiket pesawat satengah 1 enjing kanggo penerbangan jam 6 enjing\. E - tiket enjing dikirim\. Ngadadak dihubungi liwat email nanging tiket nanging dibayar nanging waktos-waktos enjing\. Nanging tikete akeh bisa dibooking\.|Kuciwa banget\. Pesen lan mbayar tiket motor mabur dilaksanakake jam setengah 1 isuk kanggo penerbangan jam6 isuk\. E - tiket ora dikirim\. Dumadakan dihubungi via email yen tiket sing uwis dibayar uwis entek jam-jam isuk\. Yen tikete entek ngapa egek isa dipesen\.|16\.33191451918006|0\.43979369011146585|\[-0\.1022194\]|
-|17|68|Hese ngartos jalma anu ngarasa osok bener|Hese ngartos jalma sing ngarasa osok bener|Angel banget ngerteni wong sing terus rumangsa pener|5\.693025330278465|0\.06329113924050632|\[-0\.32003397\]|
-|18|231|Satuju beuki naek fase wajar upami tiket naek\. Mung, pangaos dasar sawaktos fase panyisihan tos kaawisan\. Cobi bandingkeun pangaos lalajo di malaysia, thailand\.|Aku nyaeta fase wajar nanging tiket nyaeta\. Ngan, regane nyaeta fase nyisihan tiasa\. Cobi bandingke regane ning malaysia, thailand\.|Setuju saya munggah fase wajar yen tiket munggah\. Nanging, rega dasar ing pas fase penyisihan uwis kelarangan\. Coba bandingake rega nonton ing malaysia, thailand\.|11\.066171274883231|0\.35867446393762187|\[-0\.1297721\]|
-|19|198|Sumping ka restoran ieu teu aya bosenna, komo dina dinten wengi arurang sakulawargi resep pisan tempat ieu kumargi aya live musikna\. Suasanana teu gentos ti tahun ka tahun\. Menu nu disayogikeun ge keneh teteup sami, ti mimiti menu eropa nepi menu khas indonesia keneh memikat\. Porsina ge teu eleuh seueur\.|Panggonane iki ora ana bosene, komo ing dina wengi seneng banget panggonane iki kumargi ana live musike\. Suwasanane ora gentos ing tahun ing tahun\. Menu sing disayogikeun karo teteup sami, ora mimiti menu eropa nepi menu khas indonesia keneh memikat\. Porsine uga ora enak\.|Teko marang restoran iki ora ana bosene, apa maneh ini mbengi minggu dhewe sakaluwarga seneng tenan panggonan iki amarga ana live musike\. Suwasanane ora owah nahunan\. Menu sing disajikake egek tetep padha, saka mulai menu eropa nganti menu khas indonesia tetep nyengsemake\. Porsine uga ora kalah akeh\.|25\.624487697618193|0\.5047220501103666|\[-0\.18800953\]|
-|20|152|Hayang ka hotel nu di mongkok Hongkong, teu aya\! Sasih Juni kamari, kuring pesen sareng parantos mayar 2 kamar\. Tapi hotelna teu kapanggih\.|Aku hotel sing ning mongkok Hongkong, ora ana\! Sasih Juni kamari, kuring pesen lan pesen mayar 2 kamar\. Tapi hotelne ora kapanggih\.|Arep nyang hotel ning mongkok hongkong, ora ana\! Sasi juni wingi, aku mesen lan wis mbayar dingge 2 kamar\. Nanging hotele ora temu|15\.35259783865636|0\.5398582175925926|\[-0\.15853569\]|
 
+The accuracy from Sundanese-Javanese/Javanese-Sundanese is more good that other task translation dor local languages since we doing unsupervised learning to T5-small model.
 
 
 ```python
